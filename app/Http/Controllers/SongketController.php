@@ -36,7 +36,7 @@ class SongketController extends Controller
             [
                 'nama_songket' => 'required|string|max:255',
                 'deskripsi' => 'required',
-                'gambar' => 'required|file|image|max:5000',
+                'gambar' => 'required|string',
             ],
             [
                 'nama_songket.required' => 'Nama Songket wajib diisi',
@@ -44,23 +44,13 @@ class SongketController extends Controller
                 'nama_songket.max' => 'Nama Songket maksimal 255 karakter',
                 'deskripsi.required' => 'Deskripsi wajib diisi',
                 'gambar.required' => 'Gambar wajib diisi',
-                'gambar.file' => 'Gambar harus berupa file',
-                'gambar.image' => 'Gambar harus berupa gambar',
-                'gambar.max' => 'Gambar maksimal 5000 KB',
             ]
         );
 
-        //untuk mengisi foto
-        $ext = $request->gambar->getClientOriginalExtension();
-        $nama_file = "gambar" . time() . "." . $ext;
-        $path = $request->gambar->storeAs('public', $nama_file);
-
-        $data = [
-            'nama_songket' => $validate['nama_songket'],
-            'deskripsi' => $validate['deskripsi'],
-            'gambar' => $nama_file,
-        ];
-        Songket::create($data);
+        $result = Songket::create($validate);
+        $data['success'] = true;
+        $data['message'] = 'Data berhasil ditambahkan';
+        $data['result'] = $result;
         return response()->json(['message' => 'Data berhasil disimpan'], Response::HTTP_CREATED);
     }
 
@@ -93,7 +83,7 @@ class SongketController extends Controller
             [
                 'nama_songket' => 'required|string|max:255',
                 'deskripsi' => 'required',
-                'gambar' => 'required|file|image|max:5000',
+                'gambar' => 'required|string',
             ],
             [
                 'nama_songket.required' => 'Nama Songket wajib diisi',
@@ -101,23 +91,14 @@ class SongketController extends Controller
                 'nama_songket.max' => 'Nama Songket maksimal 255 karakter',
                 'deskripsi.required' => 'Deskripsi wajib diisi',
                 'gambar.required' => 'Gambar wajib diisi',
-                'gambar.file' => 'Gambar harus berupa file',
-                'gambar.image' => 'Gambar harus berupa gambar',
-                'gambar.max' => 'Gambar maksimal 5000 KB',
             ]
         );
-        // untuk mengisi foto
-        $ext = $request->gambar->getClientOriginalExtension();
-        $nama_file = "gambar" . time() . "." . $ext;
-        $path = $request->gambar->storeAs('public', $nama_file);
 
-        $data = [
-            'nama_songket' => $validate['nama_songket'],
-            'deskripsi' => $validate['deskripsi'],
-            'gambar' => $nama_file,
-        ];
 
-        Songket::where('id', $id)->update($data);
+        $result = Songket::where('id', $id)->update($validate);
+        $data['success'] = true;
+        $data['message'] = 'Data berhasil diubah';
+        $data['result'] = $result;
         return redirect()->to('songket')->with('success', 'Data berhasil diubah');
     }
 
