@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SongketController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\PengaduanController;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
@@ -17,3 +18,9 @@ Route::middleware('auth:sanctum')->delete('/songket/{songket}', [songketControll
 Route::post('/register', [RegisterController::class,'register']);
 Route::post('/login', [RegisterController::class,'login']);
 Route::post('/logout', [RegisterController::class,'logout'])->middleware('auth:sanctum');
+
+//Pengaduan
+Route::middleware('auth:sanctum')->post('/pengaduan', [PengaduanController::class, 'store']);
+Route::middleware('auth:sanctum')->get('/pengaduan', [PengaduanController::class, 'index']);
+Route::middleware('auth:sanctum')->get('/pengaduan/{pengaduan}', [PengaduanController::class, 'show']);
+Route::middleware('auth:sanctum')->delete('/pengaduan/{pengaduan}', [PengaduanController::class, 'destroy']);
