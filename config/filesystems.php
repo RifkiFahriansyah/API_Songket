@@ -39,8 +39,8 @@ return [
 
         'public' => [
             'driver' => 'local',
-            'root' => storage_path('app/public'),
-            'url' => env('APP_URL').'/storage',
+            'root' => env('STORAGE_PATH', '/tmp'), // Ubah default ke /tmp untuk Vercel
+            'url' => env('APP_URL') . '/storage', // URL untuk akses file
             'visibility' => 'public',
             'throw' => false,
         ],

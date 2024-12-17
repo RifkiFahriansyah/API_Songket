@@ -26,6 +26,10 @@
             "dest": "/public/vendors/"
         },
         {
+            "src": "/storage/(.*)",
+            "dest": "/tmp/$1"
+        },
+        {
             "src": "/(.*)",
             "dest": "/api/index.php"
         }
