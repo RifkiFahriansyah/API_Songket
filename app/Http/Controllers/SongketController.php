@@ -99,7 +99,7 @@ class SongketController extends Controller
         $data['success'] = true;
         $data['message'] = 'Data berhasil diubah';
         $data['result'] = $result;
-        return redirect()->to('songket')->with('success', 'Data berhasil diubah');
+        return response()->json($data, Response::HTTP_OK);
     }
 
     /**
@@ -107,7 +107,16 @@ class SongketController extends Controller
      */
     public function destroy(string $id)
     {
-        Songket::where('id', $id)->delete();
-        return redirect()->to('songket')->with('success', 'Data berhasil dihapus');
+        $songket = Songket::find($id);
+        if($songket){
+            $songket->delete();
+            $data['success'] = true;
+            $data['message'] = 'Data berhasil dihapus';
+            return response()->json($data, Response::HTTP_OK);
+        }else{
+            $data['success'] = false;
+            $data['message'] = 'Data tidak ditemukan';
+            return response()->json($data, Response::HTTP_NOT_FOUND);
+        }
     }
 }
