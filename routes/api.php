@@ -21,7 +21,7 @@ Route::post('/login', [RegisterController::class,'login']);
 Route::post('/logout', [RegisterController::class,'logout'])->middleware('auth:sanctum');
 
 //Pengaduan
-Route::middleware('auth:sanctum')->post('/pengaduan', [PengaduanController::class, 'store']);
+Route::post('/pengaduan', [PengaduanController::class, 'store']);
 Route::middleware('auth:sanctum')->get('/pengaduan', [PengaduanController::class, 'index']);
 Route::middleware('auth:sanctum')->get('/pengaduan/{pengaduan}', [PengaduanController::class, 'show']);
 Route::middleware('auth:sanctum')->delete('/pengaduan/{pengaduan}', [PengaduanController::class, 'destroy']);
