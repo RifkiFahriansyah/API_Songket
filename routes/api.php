@@ -14,6 +14,7 @@ Route::middleware('auth:sanctum')->get('/songket', [songketController::class, 'i
 Route::middleware('auth:sanctum')->post('/songket/create', [songketController::class, 'store']);
 Route::middleware('auth:sanctum')->patch('/songket/{songket}', [songketController::class, 'update']);
 Route::middleware('auth:sanctum')->delete('/songket/{songket}', [songketController::class,'destroy']);
+Route::middleware('auth:sanctum')->get('/songket/{songket}', [songketController::class,'show']);
 
 Route::post('/register', [RegisterController::class,'register']);
 Route::post('/login', [RegisterController::class,'login']);
