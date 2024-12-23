@@ -40,7 +40,7 @@ class RegisterController extends Controller
                 'success' => true,
                 'message' => 'User berhasil didaftarkan',
                 'data' => $success
-            ], Response::HTTP_CREATED);
+            ], 201);
         }
     }
 
