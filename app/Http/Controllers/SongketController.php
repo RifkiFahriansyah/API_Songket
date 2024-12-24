@@ -57,9 +57,9 @@ class SongketController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(songket $dataSongket)
+    public function show(songket $songket)
     {
-        $songket = Songket::find($dataSongket);
+        $songket = Songket::find($songket);
         $data['success'] = true;
         $data['message'] = "Detail data fakultas";
         $data['result'] = $songket;
