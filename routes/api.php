@@ -10,7 +10,7 @@ Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
 
-Route::middleware('auth:sanctum')->get('/songket', [songketController::class, 'index']);
+Route::get('/songket', [songketController::class, 'index']);
 Route::middleware('auth:sanctum')->post('/songket/create', [songketController::class, 'store']);
 Route::middleware('auth:sanctum')->patch('/songket/{songket}', [songketController::class, 'update']);
 Route::middleware('auth:sanctum')->delete('/songket/{songket}', [songketController::class,'destroy']);
